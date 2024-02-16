@@ -1,0 +1,24 @@
+{{define "content"}}
+<div>
+    <p>Config is stored at: <code>{{.Path}}</code></p>
+    <p></p>
+</div>
+
+<form id="configForm" action="/config" method="POST">
+    <button type="submit">Save</button>
+    <button type="reset" hx-delete="/config" hx-confirm="Are you sure?" hx-swap="none">Reset</button>
+    <div id="editor" style="height: 30rem">{{.Config}}</div>
+    <input type="hidden" id="config" name="config">
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/ace-builds@1.32.6/src-min-noconflict/ace.min.js"></script>
+<script>
+    const editor = ace.edit("editor");
+    editor.session.setMode("ace/mode/json");
+
+    document.getElementById("configForm").addEventListener("submit", function (event) {
+        const config = editor.getValue();
+        document.getElementById("config").value = config;
+    });
+</script>
+{{end}}

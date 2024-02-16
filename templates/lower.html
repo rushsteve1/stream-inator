@@ -1,0 +1,18 @@
+{{define "content"}}
+<form id="lower-form" action="/lower" method="POST">
+    <fieldset>
+        <label for="lower">Lower 3<sup>rd</sup></label>
+        <input type="text" name="lower" id="lower" value="{{.Lower}}">
+    </fieldset>
+
+    <fieldset>
+        <label for="minutes">Break</label>
+        <input type="number" name="minutes" id="minutes" placeholder="Minutes">
+        or set it by the end time
+        <input type="time" name="timeout" id="timeout">
+        <button>Start Timer</button>
+    </fieldset>
+
+    <button type="submit">Save</button>
+</form>
+{{end}}

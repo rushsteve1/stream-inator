@@ -1,0 +1,22 @@
+{{define "tile"}}
+	<div id="{{.}}">
+		<div class="tile-header">
+			<h2>{{.}}</h2>
+			<button hx-on:click="window.open('://' + window.location.host + '/{{.}}', '_blank', 'popup=1')">Pop</button>
+		</div>
+		<div hx-get="/{{.}}" hx-trigger="load" hx-select="main"></div>
+	</div>
+{{end}}
+
+{{define "content"}}
+<div>
+	<p>State is available at <code>{{.OutFile}}</code> and <code><a href="" target="_blank">/state.json</a></code></p>
+</div>
+
+<div style="display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr)">
+	{{template "tile" "match"}}
+	{{template "tile" "comms"}}
+	{{template "tile" "lower"}}
+	{{template "tile" "bracket"}}
+</div>
+{{end}}

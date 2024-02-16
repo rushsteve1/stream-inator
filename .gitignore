@@ -1,0 +1,12 @@
+.vscode/
+*.swp
+*~
+.DS_Store
+.directory
+
+stream-inator
+*.exe
+*.log
+build/
+__debug*
+*.json

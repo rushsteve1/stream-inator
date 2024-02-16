@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Stream-inator</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+    <style>
+        header, .tile-header {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        {{block "style" .}}{{end}}
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Stream-inator</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/match">Match</a>
+            <a href="/comms">Comms</a>
+            <a href="/bracket">Bracket</a>
+            <a href="/lower">Lower 3<sup>rd</sup></a>
+            <a href="/config">Config</a>
+        </nav>
+    </header>
+    <main>
+        {{template "content" .}}
+    </main>
+</body>
+
+</html>
