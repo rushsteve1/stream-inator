@@ -5,29 +5,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Stream-inator</title>
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="/static/vendor/htmx.min.js"></script>
+    <link rel="stylesheet" href="/static/base.css">
 
     <style>
-        header, .tile-header {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        {{block "style" .}}{{end}}
+        {{ block "style" .  }}{{ end }}
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Stream-inator</h1>
         <nav>
-            <a href="/">Home</a>
-            <a href="/match">Match</a>
-            <a href="/comms">Comms</a>
-            <a href="/bracket">Bracket</a>
-            <a href="/lower">Lower 3<sup>rd</sup></a>
-            <a href="/config">Config</a>
+            <ul>
+                <li>
+                    <h1>Stream-inator</h1>
+                </li>
+            </ul>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/match">Match</a></li>
+                <li><a href="/comms">Comms</a></li>
+                <li><a href="/bracket">Bracket</a></li>
+                <li><a href="/lower">Lower 3<sup>rd</sup></a></li>
+                <li><a href="/config">Config</a></li>
+            </ul>
         </nav>
     </header>
     <main>

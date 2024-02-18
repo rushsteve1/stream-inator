@@ -1,3 +1,12 @@
 {{define "content"}}
-bracket
+<article id="bracket" hx-target="this" hx-select="#bracket">
+    <form action="/bracket" method="POST" hx-boost>
+        <fieldset role="group">
+            <label for="bracket">Bracket</label>
+            <input type="text" name="bracket" id="bracket" value="{{.Bracket}}">
+        </fieldset>
+
+        <button type="submit">Save</button>
+    </form>
+</article>
 {{end}}

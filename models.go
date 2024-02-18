@@ -16,7 +16,7 @@ type State struct {
 	Comms []Commentator
 
 	// Lower third state
-	LowerThird string
+	LowerThird LowerThird
 	Timeout    time.Time
 
 	// Bracket state
@@ -27,8 +27,8 @@ var GlobalState State
 
 func (s *State) Reset() {
 	s.Match = Match{}
-	s.LowerThird = ""
 	s.Timeout = time.Time{}
+	s.LowerThird = LowerThird{}
 	s.Bracket = Bracket{}
 }
 
@@ -62,10 +62,15 @@ func (s *State) Load() {
 	err = json.NewDecoder(file).Decode(s)
 	if err != nil {
 		slog.Error(err.Error())
-		panic(err)
+		return
 	}
 
 	slog.Info("State loaded")
+}
+
+type LowerThird struct {
+	Top  string
+	Bottom string
 }
 
 type Player struct {

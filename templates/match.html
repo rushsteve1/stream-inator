@@ -1,45 +1,56 @@
 {{define "content"}}
-<form id="match-form" action="/match" method="POST">
-    <fieldset>
-        <label for="p1name">Player 1</label>
-        <input type="text" id="p1team" name="p1team" placeholder="Team" list="teams" value="{{.Match.P1.Team}}">
-        <input type="text" id="p1name" name="p1name" placeholder="Name" list="players" value="{{.Match.P1.Name}}"
-            required>
-        <input type="number" id="p1score" name="p1score" placeholder="Score" value="{{.Match.P1Score}}" required>
-    </fieldset>
+<article id="match" hx-target="this" hx-select="#match">
+    <form action="/match" method="POST" hx-boost>
+        <label>
+            Player 1
+            <fieldset role="group">
+                <input type="text" id="p1team" name="p1team" placeholder="Team" list="teams" value="{{.Match.P1.Team}}">
+                <input type="text" id="p1name" name="p1name" placeholder="Name" list="players"
+                    value="{{.Match.P1.Name}}" required>
+                <input type="number" id="p1score" name="p1score" placeholder="Score" value="{{.Match.P1Score}}"
+                    required>
+            </fieldset>
+        </label>
 
-    <button hx-patch="/match" hx-target="#match-form" hx-select="#match-form">Swap</button>
+        <button hx-patch="/match" hx-target="#match-form" hx-select="#match-form">Swap</button>
 
-    <fieldset>
-        <label for="p2name">Player 2</label>
-        <input type="text" id="p2team" name="p2team" placeholder="Team" list="teams" value="{{.Match.P2.Team}}">
-        <input type="text" id="p2name" name="p2name" placeholder="Name" list="players" value="{{.Match.P2.Name}}"
-            required>
-        <input type="number" id="p2score" name="p2score" placeholder="Score" value="{{.Match.P2Score}}" required>
-    </fieldset>
+        <label>
+            Player 2
+            <fieldset role="group">
+                <input type="text" id="p2team" name="p2team" placeholder="Team" list="teams" value="{{.Match.P2.Team}}">
+                <input type="text" id="p2name" name="p2name" placeholder="Name" list="players"
+                    value="{{.Match.P2.Name}}" required>
+                <input type="number" id="p2score" name="p2score" placeholder="Score" value="{{.Match.P2Score}}"
+                    required>
+            </fieldset>
+        </label>
 
-    <datalist id="players">
-        {{range .Players}}
-        <option value="{{.}}">
-            {{end}}
-    </datalist>
-
-    <datalist id="teams">
-        {{range .Teams}}
-        <option value="{{.}}">
-            {{end}}
-    </datalist>
-
-    <fieldset>
-        <input type="text" id="round" name="round" placeholder="Round" list="rounds" value="{{.Match.Round}}" required>
-        <datalist id="rounds">
-            {{range .Rounds}}
+        <datalist id="players">
+            {{range .Players}}
             <option value="{{.}}">
                 {{end}}
         </datalist>
-    </fieldset>
 
-    <button type="submit">Save</button>
-    <button type="reset" hx-delete="/match" hx-confirm="Are you sure?" hx-target="#match-form" hx-select="#match-form">Reset</button>
-</form>
+        <datalist id="teams">
+            {{range .Teams}}
+            <option value="{{.}}">
+                {{end}}
+        </datalist>
+
+        <fieldset role="group">
+            <input type="text" id="round" name="round" placeholder="Round" list="rounds" value="{{.Match.Round}}"
+                required>
+            <datalist id="rounds">
+                {{range .Rounds}}
+                <option value="{{.}}">
+                    {{end}}
+            </datalist>
+        </fieldset>
+
+        <fieldset role="group">
+            <button type="submit">Save</button>
+            <button type="reset" hx-delete="/match" hx-confirm="Are you sure?">Reset</button>
+        </fieldset>
+    </form>
+</article>
 {{end}}

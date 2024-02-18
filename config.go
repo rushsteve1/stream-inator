@@ -9,11 +9,12 @@ import (
 )
 
 type Config struct {
-	Port    int
-	OutFile string
-	Teams   []string
-	Players []string
-	Rounds  []string
+	Port         int
+	OutFile      string
+	Teams        []string
+	Players      []string
+	Commentators []string
+	Rounds       []string
 
 	path string
 }
@@ -91,11 +92,11 @@ func (c *Config) CreateConfig(path string) {
 	c.path = path
 }
 
-func (c *Config) Update(newConfig string) {
+func (c *Config) Update(newConfig string) error {
 	err := json.Unmarshal([]byte(newConfig), c)
 	if err != nil {
 		slog.Error(err.Error())
-		panic(err)
+		return err
 	}
 
 	file, err := os.Create(c.Path())
@@ -110,6 +111,8 @@ func (c *Config) Update(newConfig string) {
 		slog.Error(err.Error())
 		panic(err)
 	}
+
+	return nil
 }
 
 func (c *Config) Reset() {

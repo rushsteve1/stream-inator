@@ -1,9 +1,41 @@
 {{define "content"}}
-<form>
-    <fieldset>
-        <label for="comms">Left Commentator</label>
-        <input type="text" name="comms" id="comms" value="{{.Comms}}">
-    </fieldset>
+<article id="comms" hx-target="this" hx-select="#comms">
+    <form action="/comms" method="POST" hx-boost>
+        {{ range $i, $c := .Comms }}
+        <fieldset id="comm-{{$i}}">
+            <label for="comms">Commentator {{inc $i}}</label>
+            <input type="text" name="team" id="team" placeholder="Team" list="teams" value="{{$c.Team}}">
+            <input type="text" name="name" id="name" placeholder="Name" list="names" value="{{$c.Name}}">
+            <input type="text" name="social" id="social" placeholder="Social" value="{{$c.Social}}">
+            <input type="text" name="pronouns" id="pronouns" placeholder="Pronouns" list="plist"
+                value="{{$c.Pronouns}}">
+        </fieldset>
+        {{ end }}
 
-    <button type="submit">Save</button>
+        <datalist id="teams">
+            {{ range .Teams }}
+            <option value="{{.}}"></option>
+            {{ end }}
+        </datalist>
+
+        <datalist id="names">
+            {{ range .Comms }}
+            <option value="{{.}}"></option>
+            {{ end }}
+        </datalist>
+
+        <datalist id="plist">
+            <option value="he/him"></option>
+            <option value="she/her"></option>
+            <option value="they/them"></option>
+        </datalist>
+
+        <a hx-boost href="/comms?l={{inc (len .Comms)}}">
+            Add Commentator
+        </a>
+
+        <button type="submit">Save</button>
+        <button type="reset" hx-delete="/comms" hx-confirm="Are you sure?">Clear</button>
+    </form>
+</article>
 {{end}}

@@ -1,8 +1,14 @@
 {{define "content"}}
-<form id="lower-form" action="/lower" method="POST">
+<article id="lower" hx-target="this" hx-select="#lower">
+<form action="/lower" method="POST" hx-boost>
     <fieldset>
-        <label for="lower">Lower 3<sup>rd</sup></label>
-        <input type="text" name="lower" id="lower" value="{{.Lower}}">
+        <label for="lower">Lower 3<sup>rd</sup> Top</label>
+        <input type="text" name="lower-top" id="lower-top" value="{{.LowerThird.Top}}">
+    </fieldset>
+
+    <fieldset>
+        <label for="lower">Lower 3<sup>rd</sup> Bottom</label>
+        <input type="text" name="lower-bottom" id="lower-bottom" value="{{.LowerThird.Bottom}}">
     </fieldset>
 
     <fieldset>
@@ -15,4 +21,5 @@
 
     <button type="submit">Save</button>
 </form>
+</article>
 {{end}}
